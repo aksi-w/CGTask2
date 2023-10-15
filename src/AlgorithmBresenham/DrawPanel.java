@@ -8,7 +8,7 @@ public class DrawPanel extends JPanel {
     private Bresenham b;
 
     public DrawPanel() {
-        b = new Bresenham(50, 200, 50, 200, Color.RED);
+        b = new Bresenham(50, 200, 50, 200, Color.RED, Color.BLACK);
 
 
     }

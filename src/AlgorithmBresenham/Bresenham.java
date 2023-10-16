@@ -4,7 +4,7 @@ import java.awt.*;
 
 public class Bresenham {
     private int x1, x2, y1, y2; // координаты начала и конца
-    private Color sC, eC;
+    private Color sC,eC;
 
 
     public Bresenham(int x1, int x2, int y1, int y2, Color sC, Color eC) {
@@ -21,56 +21,51 @@ public class Bresenham {
         int dy = Math.abs(y2 - y1);
         int ddx = sign(x2 - x1);
         int ddy = sign(y2 - y1);
-        int lala = x2-x1;
-        int kuku = y2-y1;
 
-        int x = x1; // текущие координаты
+        int x = x1;
         int y = y1;
 
-        g.setColor(Color.RED);
         g.fillRect(x, y, 1, 1); // Начальная точка
 
         if (dx > dy) {
-            int e = 2*dx-dy;
+            int e = dx / 2;
 
             while (x != x2) {
                 x += ddx;
-                e -= 2*dy;
+                e -= dy;
                 if (e < 0) {
                     y += ddy;
-                    e += 2*dx;
+                    e += dx;
                 }
-                float k = (float) (x - x1) / lala;
-                Color currentColor = interpolateColor(sC, eC, k);
+                float t = (float) (x - x1) / (x2 - x1);
+                Color currentColor = interpolateColor(sC, eC, t);
                 g.setColor(currentColor);
                 g.fillRect(x, y, 1, 1);
             }
         } else {
-            int e = 2*dy-dx;
+            int e = dy / 2;
 
             while (y != y2) {
                 y += ddy;
-                e -= 2*dx;
+                e -= dx;
                 if (e < 0) {
                     x += ddx;
-                    e += 2*dy;
+                    e += dy;
                 }
-                float k = (float) (y - y1) / kuku;
-                Color currentColor = interpolateColor(sC, eC, k);
+                float t = (float) (y - y1) / (y2 - y1);
+                Color currentColor = interpolateColor(sC, eC, t);
                 g.setColor(currentColor);
                 g.fillRect(x, y, 1, 1);
             }
         }
     }
-
     private int sign(int x) {
         return (x > 0) ? 1 : (x < 0) ? -1 : 0;
     }
-
-    private Color interpolateColor(Color s, Color e, float k) {
-        int red = (int) (s.getRed() + (e.getRed() - s.getRed()) * k);
-        int green = (int) (s.getGreen() + (e.getGreen() - s.getGreen()) * k);
-        int blue = (int) (s.getBlue() + (e.getBlue() - s.getBlue()) * k);
+    private Color interpolateColor(Color start, Color end, float t) {
+        int red = (int) (start.getRed() + t * (end.getRed() - start.getRed()));
+        int green = (int) (start.getGreen() + t * (end.getGreen() - start.getGreen()));
+        int blue = (int) (start.getBlue() + t * (end.getBlue() - start.getBlue()));
         return new Color(red, green, blue);
     }
 }

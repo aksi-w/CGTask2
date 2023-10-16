@@ -31,6 +31,7 @@ public class Bresenham {
         g.fillRect(x, y, 1, 1); // Начальная точка
 
         if (dx > dy) {
+
             int e = 2*dx-dy;
 
             while (x != x2) {

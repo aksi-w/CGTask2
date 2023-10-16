@@ -27,7 +27,7 @@ public class Bresenham {
         int x = x1; // текущие координаты
         int y = y1;
 
-        g.setColor(Color.RED);
+
         g.fillRect(x, y, 1, 1); // Начальная точка
 
         if (dx > dy) {

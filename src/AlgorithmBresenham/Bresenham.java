@@ -22,16 +22,15 @@ public class Bresenham {
         int ddx = sign(x2 - x1);
         int ddy = sign(y2 - y1);
         int lala = x2-x1;
-        int kuku = y2-y1;
+        int qqq = y2-y1;
 
         int x = x1; // текущие координаты
         int y = y1;
 
-
+        g.setColor(Color.RED);
         g.fillRect(x, y, 1, 1); // Начальная точка
 
         if (dx > dy) {
-
             int e = 2*dx-dy;
 
             while (x != x2) {
@@ -56,7 +55,7 @@ public class Bresenham {
                     x += ddx;
                     e += 2*dy;
                 }
-                float k = (float) (y - y1) / kuku;
+                float k = (float) (y - y1) / qqq;
                 Color currentColor = interpolateColor(sC, eC, k);
                 g.setColor(currentColor);
                 g.fillRect(x, y, 1, 1);
